@@ -1,5 +1,4 @@
-# 
-
+# === Python ===========================
 # Python 2
 python=$(python --version 2>&1)
 if [[ $python == *"Python"* ]]; then
@@ -16,6 +15,26 @@ else
     echo "Python 3 - Not installed"
 fi
 
+
+# === Rust ===========================
+# Cargo
+cargo=$(cargo --version 2>&1)
+if [[ $cargo == *"cargo"* ]]; then
+    echo $cargo
+else
+    echo "cargo" "Not installed"
+fi
+
+# rustc
+rustc=$(rustc --version 2>&1)
+if [[ $rustc == *"rustc"* ]]; then
+    echo $rustc
+else
+    echo "rustc" "Not installed"
+fi
+
+
+# # === Other ===========================
 # Template
 temp=$(temp --version 2>&1)
 if [[]]; then
