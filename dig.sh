@@ -1,44 +1,43 @@
-# === Python ===========================
-# Python 2
-python=$(python --version 2>&1)
-if [[ $python == *"Python"* ]]; then
-    echo $python
-else
-    echo "Python 2 - Not intalled"
-fi
+#/bin/bash
 
-# Python 3
-python3=$(python --version 2>&1)
-if [[ $python3 == *"Python"* ]]; then
-    echo $python3i
-else
-    echo "Python 3 - Not installed"
-fi
+dig () {
+    local cmd=$1
+    local version_regex="((?:\d+\.)+(?:\d+))(p\d+)?(?:.*?)"
+    local version=$($cmd --version 2>&1 |& grep -oP -m1 $version_regex |  sed -n '1p')
 
+    if [ "$version" == "" ]; then
+        version=$($cmd version 2>&1 |& grep -oP -m1 $version_regex |  sed -n '1p')
+    fi
 
-# === Rust ===========================
-# Cargo
-cargo=$(cargo --version 2>&1)
-if [[ $cargo == *"cargo"* ]]; then
-    echo $cargo
-else
-    echo "cargo" "Not installed"
-fi
+    if [ "$version" == "" ]; then
+        echo $cmd "Not installed"
+    else
+        echo $cmd $version
+    fi
+}
 
-# rustc
-rustc=$(rustc --version 2>&1)
-if [[ $rustc == *"rustc"* ]]; then
-    echo $rustc
-else
-    echo "rustc" "Not installed"
-fi
+echo "=== Scripting ==="
+dig npm
+dig python
+dig python3
+dig ruby
+dig perl
+dig awk
+echo
 
+echo "=== Systems ==="
+dig rustc
+dig cargo
+dig gcc
+dig cpp
+dig go
+echo
 
-# # === Other ===========================
-# Template
-temp=$(temp --version 2>&1)
-if [[]]; then
-    echo
-else
-    echo
-fi
+echo "=== JVM ==="
+dig java
+echo
+
+echo "=== Fucntional ==="
+dig haskell
+dig racket # do raco
+echo
