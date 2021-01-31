@@ -1,2 +1,2 @@
-# dig
+# pile
 Master sript to find installed software on Nix machines
