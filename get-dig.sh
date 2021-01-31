@@ -1,4 +1,4 @@
 #/bin/sh
 
-curl https://github.com/chunibio/dig/blob/main/dig.sh
+curl -o /usr/bin/dig URL
 chmod
