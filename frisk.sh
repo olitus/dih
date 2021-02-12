@@ -19,7 +19,7 @@ pos_rows_fmt="$green %1s   $cyan%-10s   $blue%-10s   $purple%-15s$fmt_end\n"
 neg_rows_fmt="$red %1s   $normal$dim%-10s   $dim%-10s   $dim%-15s$fmt_end\n"
 TableWidth=50
 
-dig () {
+frisk () {
     local cmd=$1
     local platform=$cmd
 
@@ -46,30 +46,31 @@ dig () {
 }
 
 printf "$title_fmt" "Language" "Command" "Version"
-dig python Python
-dig python3 Python
-dig ruby
-dig perl
-dig awk
+frisk python Python
+frisk python3 Python
+frisk ruby
+frisk perl
+frisk awk
+frisk julia
 
-dig npm JavaScript
-dig php
+frisk npm JavaScript
+frisk php
 
-dig gcc C
-dig gdb C
-dig cpp C++
-dig clang C/C++
-dig cargo Rust
-dig rustc Rust
-dig go
-dig zig
+frisk gcc C
+frisk gdb C
+frisk cpp C++
+frisk clang C/C++
+frisk cargo Rust
+frisk rustc Rust
+frisk go
+frisk zig
 
-dig java JVM
+frisk java JVM
 
-dig ghc haskell
-dig racket # do raco
+frisk ghc haskell
+frisk racket # do raco
 
 printf "$title_fmt" "Utility" "Command" "Version"
-dig docker Docker
+frisk docker Docker
 
 echo
