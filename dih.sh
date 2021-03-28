@@ -51,6 +51,7 @@ else
     dih perl
     dih awk
     dih julia
+    dih lua
 
     dih npm JavaScript
     dih php
@@ -63,6 +64,7 @@ else
     dih rustc Rust
     dih go
     dih zig
+    dih mono C#
 
     dih java JVM
 
