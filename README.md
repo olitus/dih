@@ -1,2 +1,2 @@
-# dih
+# Do I Have? ...
 Master sript to find installed software on Nix machines
