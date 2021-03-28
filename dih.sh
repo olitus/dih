@@ -1,9 +1,5 @@
 #/bin/bash
 
-case $1
-SHOW_LOCATION=
-
-
 normal=$'\e[0m'
 red=$'\e[1;31m'
 green=$'\e[1;32m'
