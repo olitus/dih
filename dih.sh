@@ -41,32 +41,36 @@ dih () {
     fi
 }
 
-printf "$title_fmt" "Language" "Command" "Version"
-dih python Python
-dih python3 Python
-dih ruby
-dih perl
-dih awk
-dih julia
+if ! [ -z "$1" ]; then
+    dih $1
+else 
+    printf "$title_fmt" "Language" "Command" "Version"
+    dih python Python
+    dih python3 Python
+    dih ruby
+    dih perl
+    dih awk
+    dih julia
 
-dih npm JavaScript
-dih php
+    dih npm JavaScript
+    dih php
 
-dih gcc C
-dih gdb C
-dih cpp C++
-dih clang C/C++
-dih cargo Rust
-dih rustc Rust
-dih go
-dih zig
+    dih gcc C
+    dih gdb C
+    dih cpp C++
+    dih clang C/C++
+    dih cargo Rust
+    dih rustc Rust
+    dih go
+    dih zig
 
-dih java JVM
+    dih java JVM
 
-dih ghc haskell
-dih racket # do raco
+    dih ghc haskell
+    dih racket # do raco
 
-printf "$title_fmt" "Utility" "Command" "Version"
-dih docker Docker
+    printf "$title_fmt" "Utility" "Command" "Version"
+    dih docker Docker
 
-echo
+    echo
+fi
