@@ -77,6 +77,7 @@ else
     dih go
     dih zig
     dih mono C#
+    dih mono F#
 
     dih java JVM
 
