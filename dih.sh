@@ -33,6 +33,18 @@ dih () {
     if [ "$version" == "" ]; then
         version=$($cmd version 2>&1 |& grep -oP -m1 $version_regex | sed -n '1p')
     fi
+    
+    if [ "$version" == "" ]; then
+        version=$($cmd --help 2>&1 |& grep -oP -m1 $version_regex | sed -n '1p')
+    fi
+    
+    if [ "$version" == "" ]; then
+        version=$($cmd -help 2>&1 |& grep -oP -m1 $version_regex | sed -n '1p')
+    fi
+    
+    if [ "$version" == "" ]; then
+        version=$($cmd help 2>&1 |& grep -oP -m1 $version_regex | sed -n '1p')
+    fi
 
     if [ "$version" == "" ]; then
         printf "$neg_rows_fmt" "X" "$platform" "$cmd" "---"
