@@ -4,18 +4,13 @@
 
 use std::io;
 use std::thread;
-use std::time::Duration;
-// use clap::App;
 use std::process::Command;
 use regex::Regex;
 use colored::*;
-// use inflector::Inflector;
-// use rayon::prelude::*;
 use indicatif::{ProgressBar, MultiProgress, ProgressStyle};
 
 type Result<T> = std::result::Result<T, std::io::Error>;
 
-// version=$($cmd -version 2>&1 |& grep -oP -m1 $version_regex | sed -n '1p')
 fn version_with_keyword(cmd: &str, keyword: &str) -> Result<String> {
     let cmd_out = String::from_utf8(Command::new(cmd).arg(keyword).output()?.stdout).unwrap();
     let re = Regex::new(r"((?:\d+\.)+(?:\d+))(p\d+)?(?:.*?)").unwrap();
@@ -42,13 +37,6 @@ fn version(cmd: &str) -> Option<String> {
     }
 }
 
-// fn dih(cmd: &str) -> Entry {
-//     match version(cmd) {
-//         Some(ver) => Entry::i_have(cmd.into(), ver.as_str()),
-//         None => Entry::i_have_not(cmd.into())
-//     }   
-// }
-
 fn in_path(cmd: &str) -> bool {
     match Command::new("command").arg("-v").arg(cmd).output() {
         Ok(output) => match String::from_utf8(output.stdout) {
@@ -61,44 +49,6 @@ fn in_path(cmd: &str) -> bool {
         _ => false
     }
 }
-
-// fn name_of(cmd: &str) -> String {
-//     match cmd {
-//         "cpp" => "C++".into(),
-//         _ => cmd.to_sentence_case()
-//     }
-// }
-
-// struct Entry {
-//     status: ColoredString,
-//     name: ColoredString,
-//     command: ColoredString,
-//     version: ColoredString
-// }
-
-// impl Entry {
-//     fn i_have(command: &str, version: &str) -> Entry{
-//         Entry {
-//             status: "✓".green(),
-//             name: name_of(&command).cyan(),
-//             command: command.blue(),
-//             version: version.bright_magenta()
-//         }
-//     }
-    
-//     fn i_have_not(command: &str) -> Entry {
-//         Entry {
-//             status: "X".red(),
-//             name: name_of(&command).dimmed(),
-//             command: command.dimmed(),
-//             version: "---".dimmed()
-//         }
-//     }
-
-//     fn msg(self) -> String {
-//         format!("{: <2} {: <10} {: <10} {: <10}", self.status, self.name, self.command, self.version)
-//     }
-// }
 
 struct Language<'a> {
     name: &'a str,
@@ -135,6 +85,14 @@ fn main() {
         Language {
             name: "Crystal",
             cmds: vec!["crystal", "shards"]
+        },
+        Language {
+            name: "Python",
+            cmds: vec!["python3", "pip3", "python", "pip"]
+        },
+        Language {
+            name: "JavaScript",
+            cmds: vec!["npm", "deno"]
         },
     ];
 

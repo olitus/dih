@@ -10,6 +10,4 @@ name = "dih"
 [dependencies]
 regex = "1"
 colored = "2"
-Inflector = "0.11.4"
-rayon = "1.5"
-indicatif = {version = "*", features = ["rayon"]}
+indicatif = "*"
