@@ -9,6 +9,6 @@ name = "dih"
 
 [dependencies]
 regex = "1"
-clap = "~2.27.0"
 colored = "2"
 Inflector = "0.11.4"
+rayon = "1.5"

@@ -3,17 +3,14 @@
 // dih by Oleksandr Litus
 
 use std::io;
-use clap::App;
+// use clap::App;
 use std::process::Command;
 use regex::Regex;
 use colored::*;
 use inflector::Inflector;
+use rayon::prelude::*;
 
 type Result<T> = std::result::Result<T, std::io::Error>;
-
-fn cli() -> App<'static, 'static> {
-    App::new("dih")
-}
 
 // version=$($cmd -version 2>&1 |& grep -oP -m1 $version_regex | sed -n '1p')
 fn version_with_keyword(cmd: &str, keyword: &str) -> Result<String> {
@@ -67,9 +64,9 @@ impl Entry {
     fn i_have(command: String, version: String) -> Entry{
         Entry {
             status: "✓".green(),
-            name: name_of(&command).green(),
-            command: command.green(),
-            version: version.green()
+            name: name_of(&command).cyan(),
+            command: command.blue(),
+            version: version.bright_magenta()
         }
     }
     
@@ -114,7 +111,5 @@ fn main() {
         "ghc",
     ];
 
-    for cmd in commands {
-        dih(cmd).show();
-    }
+    commands.par_iter().for_each(|cmd| dih(cmd).show());
 }
