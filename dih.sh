@@ -82,10 +82,10 @@ else
     dih java JVM
 
     dih ghc haskell
-    dih racket # do raco
+    # dih racket # do raco
 
-    printf "$title_fmt" "Utility" "Command" "Version"
-    dih docker Docker
+    # printf "$title_fmt" "Utility" "Command" "Version"
+    # dih docker Docker
 
     echo
 fi

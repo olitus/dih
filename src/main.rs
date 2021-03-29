@@ -8,17 +8,19 @@ use std::process::Command;
 use regex::Regex;
 use colored::*;
 use inflector::Inflector;
-use std::thread;
+
+type Result<T> = std::result::Result<T, std::io::Error>;
 
 fn cli() -> App<'static, 'static> {
     App::new("dih")
 }
 
 // version=$($cmd -version 2>&1 |& grep -oP -m1 $version_regex | sed -n '1p')
-fn version_with_keyword(cmd: &str, keyword: &str) -> io::Result<String> {
+fn version_with_keyword(cmd: &str, keyword: &str) -> Result<String> {
     let cmd_out = String::from_utf8(Command::new(cmd).arg(keyword).output()?.stdout).unwrap();
     let re = Regex::new(r"((?:\d+\.)+(?:\d+))(p\d+)?(?:.*?)").unwrap();
-    let version = re.find(&cmd_out).unwrap();
+
+    let version = re.find(&cmd_out).ok_or(io::Error::new(io::ErrorKind::Other, "no match"))?;
     Ok(version.as_str().into())
 }
 
@@ -89,15 +91,30 @@ fn main() {
 
     let commands = vec![
         "cargo",
+        "python",
+        "python3",
+        "ruby",
+        "perl",
+        "awk",
+        "julia",
+        "lua",
         "go",
-        "racket"
+        "racket",
+        "npm",
+        "php",
+        "gcc",
+        "gdb",
+        "cpp",
+        "clang",
+        "cargo",
+        "rustc",
+        "zig",
+        "mono",
+        "java",
+        "ghc",
     ];
 
-    let handle = thread::spawn(|| {
-        for cmd in commands {
-            dih(cmd).show();
-        }
-    });
-
-    handle.join().unwrap();
+    for cmd in commands {
+        dih(cmd).show();
+    }
 }
